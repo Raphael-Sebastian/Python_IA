@@ -17,5 +17,4 @@ while soma <= 100:
     soma +=num
     print(soma)
     print(f"soma total: {soma}")
-    
-    k
+
