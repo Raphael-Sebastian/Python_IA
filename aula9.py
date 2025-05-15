@@ -18,7 +18,16 @@
 # else:
 #     print(p2)
 
-entrada = input("Digite um texto: ")
+# entrada = input("Digite um texto: ")
 
-ultimo = len(entrada) - 1
-print(f"O último caracter da palavra é {entrada[ultimo]}")
+# ultimo = len(entrada) - 1
+# print(f"O último caracter da palavra é {entrada[ultimo]}")
+
+p1 = input("Digite uma string: ")
+
+penultimo = len(p1) -2
+
+if p1[penultimo] == p1[1]:
+    print(f"São iguais letra 1: {p1[penultimo]} e o letra 2: {p1[1]}")
+else:
+    print("Não são iguais")
