@@ -1,15 +1,35 @@
-quadrado = int(input("Qual o numero de string: "))
-contador = 0
+# def linha(comprimento, caractere):
+#     if caractere == "":
+#         caractere = "*"
+#     else:
+#         caractere = caractere[0]
 
-while contador < quadrado:
-    elemento = ""
-    coluna = 0
-    while coluna < quadrado:
-        if (coluna + contador) % 2 == 0:
-            elemento += "lasdlasd"
+#     contador = 0
+#     while contador < comprimento:
+#         print(caractere, acaba="")
+#         contador += 1
+#         print("a", 5)
+
+
+# def linha():
+#     comprimento = int(input("Digite o comprimento da linha (número inteiro): "))
+#     caractere = input("Digite a string (será usado o primeiro caractere): ")
+    
+#     if len(caractere) > 0:
+#         caractere = caractere[0]
+#     else:
+#         caractere = '*'
+    
+#     print(caractere * comprimento)
+
+# linha()
+
+#professor
+
+def imprimir (n,texto):
+    if texto[0] == "":
+        print("*" * n)
     else:
-        elemento += "tuasad"
-        coluna +=1
-
-    contador += 1    
-    print(elemento)
+        print(texto[0]*n)
+        
+imprimir(5,"")
