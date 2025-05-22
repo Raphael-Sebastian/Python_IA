@@ -47,3 +47,28 @@ numeros.insert(10,"Rafa")
 print(numeros)
 numeros.remove("Rafa")
 print(numeros)
+
+#Sort - Classificação
+lista = [0,45,68,98,78,65,23,35,54,47,89]
+lista.sort()
+#Sorted cria uma cópia da lista original em outra variavel
+lista_v2 = sorted(lista)
+
+print(lista_v2)
+
+#Máximo, mínimo e a soma
+lista_numeros = [0,45,78,6,32,15]
+print(max(lista_numeros))#Máximo
+print(min(lista_numeros))#mínimo
+print(sum(lista_numeros))#soma
+
+#mediana == pegar o numero do meio
+
+lista_mediana = [15,48,79,36,56,89,74,15,32]
+
+def mediana(minha_lista: list): #list obriga que seja uma lista, caso o contrario não funciona
+    ordenada = sorted(minha_lista)
+    centro_lista = len(ordenada) // 2
+    return ordenada[centro_lista]
+
+print(f"A mediana é {mediana(lista_mediana)}")
