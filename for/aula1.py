@@ -27,3 +27,4 @@ print(numero)
 
 for i in numero:
     print(i)
+    
