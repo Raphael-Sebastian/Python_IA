@@ -24,6 +24,7 @@ while True:
     op = input("comando: ")
     
     if op == "3":
+        print("Saindo...")
         break
     
     elif op == "1":
@@ -37,7 +38,9 @@ while True:
         entrada = input("Digite um nome:  ")
         numero = int(input("Digite número: "))
         lista[entrada] = numero
-        print("")
+        print("ok!")
         
     else:
         print("comando inválido")
+
+
