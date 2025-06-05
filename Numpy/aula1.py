@@ -1,0 +1,17 @@
+import numpy as np #sempre colocar np para apreviar o numpy 
+
+#Saída o array as dimensões pelo método (ndim)
+arr1d = np.array([1,2,3])
+print(f"Array 1D: {arr1d}, Dimensões: {arr1d.ndim}") #ndim e uma função para exibir quantas dimensões tem no arranjo(array)
+
+arr2d = np.array([[1,2,3,4,5],[5,6,8,9,6]]) #duas dimensões
+print(f"Array 2d: {arr2d}, Dimensões: {arr2d.ndim}")
+
+arr3d = np.array([[[0,5,6],[5,8,9]],[[4,5,6],[5,9,8]]]) #tres dimensões
+print(f"Array 3d: {arr3d}, Dimensões: {arr3d.ndim}")
+
+#shape
+#indica o tamanho do array
+print(f"Shape do arr1d {arr1d.shape}")
+print(f"Shape do arr1d {arr2d.shape}")
+print(f"Shape do arr1d {arr3d.shape}")
