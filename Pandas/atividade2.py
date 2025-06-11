@@ -28,4 +28,14 @@ print(df_coluna[["Series_Title", "Gross"]].head())
 
 #professor
 
-df_filmes["Released_Year"] = pd.to_numeric(df_filmes)["Released_Year"],
+#Converter a coluna "Released_Year" para numérico, caso ainda não esteja
+df_filmes["Released_Year"] = pd.to_numeric(df_filmes["Released_Year"], errors="coerce")
+#pd.to_numeric ele e usado para coverter para numerico a string, funciona tanto com float quanto inteiro
+#errors="coerce" usado para caso tenha numeros invalidos ou vazio, ele coloca como [num]
+
+#Filtra os filmes com ano >= 2016
+filmes_pos_2016 = df_filmes[df_filmes["Released_Year"] >= 2016]
+[["Series_Title", "Released_Year"]]
+print("\n4. Filmes lançados a partir de 2016:")
+print(filmes_pos_2016)
+

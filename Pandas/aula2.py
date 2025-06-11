@@ -81,3 +81,47 @@ print(df_filmes_bem_avaliados[["Series_Title","Genre"]].head())
 filmes_acao = df_filmes[df_filmes["Genre"].str.contains("Action", na=False)]
 print("\n Filmes que contem o genero 'Action'")
 print(filmes_acao[["Series_Title","Genre"]].head)
+
+#Criar uma nova coluna
+df_filmes["Rating_x_10"] = df_filmes["IMDB_Rating"] * 10
+print("\n O DataFrame agora tem uma nova coluna: ")
+print(df_filmes.head())
+
+# #Conversão da coluna Gross para float e ignorando erros caso falhar
+# df_filmes["Gross"] = pd.to_numeric(df_filmes["Gross"], errors="coerce")
+
+# #Agora, convertido o numero Gross em numero, é mais seguro fazer a comparação
+# df_filmes["Alta_receita"] = df_filmes["Gross"] > 1000
+# print("\n DataFrame com nova coluna 'Alta Receita' (Primeiras linhas)")
+# print(df_filmes.head())
+
+#Drop
+#Método drop remove uma linha (registro) ou coluna
+#axis = 1 - Excluí a coluna
+df_filmes = df_filmes.drop("Poster_Link", axis=1)
+print(df_filmes.head())
+
+#axis = 0 - exclí o registro
+df_filmes = df_filmes.drop(4,axis=0)
+print(df_filmes.head())
+
+#Lidando com dados Ausentes
+#Verificar dados ausentes com .isna() .sum():
+
+print("\nContagem de valores ausentes por coluna: ")
+print(df_filmes.isna().sum())
+
+#Removendo linhas/colunas
+#Criando uma cópia para não
+df_sem_nan_linhas = df_filmes.copy()
+
+#Removendo todas as linhas que contenham Qualquer valor Nan
+#Dropna == ele vai deletar os números 
+df_sem_nan_linhas.dropna(inplace=True)
+print(f"\n Número de linhas original: {len(df_filmes)}")
+print(f"\n Número de linha após drop: {len(df_sem_nan_linhas)}")
+
+#Removendo colunas que tenha qualquer valor Nan
+df_sem_nan_colunas = df_filmes.dropna(axis=1)
+print(f"Colunas originais: {df_filmes.columns.tolist()}")
+print(f"Colunas após dropna: {df_sem_nan_colunas.columns.tolist()}")
