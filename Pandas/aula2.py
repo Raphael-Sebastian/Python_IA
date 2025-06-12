@@ -125,3 +125,38 @@ print(f"\n Número de linha após drop: {len(df_sem_nan_linhas)}")
 df_sem_nan_colunas = df_filmes.dropna(axis=1)
 print(f"Colunas originais: {df_filmes.columns.tolist()}")
 print(f"Colunas após dropna: {df_sem_nan_colunas.columns.tolist()}")
+
+#Contando as frequências de coluna
+#value_counts() ele conta quantas vezes o valor repete na lista, ele faz uma contagem e depois com o print mostra o tanto que se repetiu
+contagem_diretores = df_filmes["Director"].value_counts()
+print("\n Os 10 dirretores mais frequentes: ")
+print(contagem_diretores.head(10))
+
+#Ordenando filmes pela nota (IMDB_Rating)
+#by= seria basicamente uma forma de dizer o que a gente quer no exemplo abaixo estamos pedindo que o "IMDB_Rating" seja usado
+df_ordenando_por_nota = df_filmes.sort_values(by="IMDB_Rating",ascending=False)
+print("\n Top 5 Filmes por nota (IMDB_Rating):")
+print(df_ordenando_por_nota)
+
+#Ordenando filmes por mais de uma coluna
+df_ordenando_por_duas_colunas = df_filmes.sort_values(by=["Released_Year","Gross"],ascending=[False,True])
+print("\n Top 5 Filmes por ano e gross:")
+print(df_ordenando_por_duas_colunas.head())
+
+#Converter caso necessário
+df_filmes["Gross"] = df_filmes["Gross"].str.replace(",","")
+df_filmes["Gross"] = pd.to_numeric(df_filmes["Gross"], errors="coerce")
+df_filmes["IMDB_Rating"] = pd.to_numeric(df_filmes["IMDB_Rating"], errors="coerce")
+
+#Calculando a média de IMDB e GROSS para cada Released_Year
+metricas_por_ano = df_filmes.groupby("Released_Year").agg(
+    Media_Rating=("IMDB_Rating","mean"),
+    Media_Receita=("Gross","mean"),
+    Total_filmes=("Series_Title","count"),
+)
+print(metricas_por_ano)
+
+#Salvando em um arquivo CSV sem o indice
+#Salvar e criar um novo arquivo csv
+df_filmes.to_csv("Pandas/meus_filmes_bem_avaliados.csv", index=False)
+print("\nDataFrame salvo em 'Meus_filmes_bem_avaliados.csv'")
