@@ -25,16 +25,3 @@ try:
             print(f"Aluno: {aluno["nome"]} - Email{aluno["email"]} - Semestre: {aluno["semestre_atual"]}")
 finally:
     conexao.close()
-
-#professor
-# while True:
-#     nome = input("Qual nome você quer cadastrar: ")  
-#     email = input("Qual email você quer cadastrar: ")
-    
-#     with conexao.cursor() as cursor:
-#         sql = "INSERT INTO alunos (nome, email, telefone, data_nascimento, curso_id, semestre_atual, status_aluno, data_matricula) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
-        
-#         valores = (nome,email,"(49)99999-2032","2003-01-21",1,2,"Ativo","2024-08-01")
-#         cursor.execute(sql,valores)
-#         conexao.commit()
-#         break
