@@ -20,8 +20,7 @@ def listar_disciplinas():
                 FROM disciplinas d
                 JOIN turmas t ON d.disciplina_id = t.disciplina_id
                 JOIN matriculas m ON t.turma_id = m.turma_id AND m.status_matricula = 'Matriculado'
-                GROUP BY d.disciplina_id, d.nome_disciplina, d.carga_horaria
-                ORDER BY d.disciplina_id;
+                GROUP BY d.disciplina_id, d.nome_disciplina, d.carga_horaria;
                 """)
             disciplinas = cursor.fetchall()
     

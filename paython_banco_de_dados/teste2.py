@@ -31,12 +31,14 @@ def listar_disciplinas():
                     t.ano DESC, t.semestre;
             """)
             disciplinas = cursor.fetchall()
-            
+
+        # Mostra os dados
         for disciplina in disciplinas:
-            print(f"Turma ID: {disciplina['turma_id']} - disciplina: {disciplina['nome_disciplina']} - Professor: {disciplina['nome_professor']} - Semestre: {disciplina['semestre']} - Ano: {disciplina['ano']} - Alunos matriculados: {disciplina['alunos_matriculados']} - Média geral: {disciplina['media_geral']:.2f}")
-            
-            
+            print(f"Turma ID: {disciplina['turma_id']} - Disciplina: {disciplina['nome_disciplina']} - "
+                  f"Professor: {disciplina['nome_professor']} - Semestre: {disciplina['semestre']} - Ano: {disciplina['ano']} - "
+                  f"Alunos matriculados: {disciplina['alunos_matriculados']} - Média geral: {disciplina['media_geral']:.2f}")
+
     finally:
         conexao.close()
-        
+
 listar_disciplinas()
