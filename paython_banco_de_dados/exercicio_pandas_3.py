@@ -1,0 +1,8 @@
+import pandas as pd
+from sqlalchemy import create_engine
+
+engine = create_engine("mysql+pymysql://root:123456@localhost/sistema_vendas")
+
+df_cidade = pd.read_sql("""select * from fornecedores where cidade = "Maringá" and status_fornecedor = "Ativo" """, con=engine)
+
+print(df_cidade)
