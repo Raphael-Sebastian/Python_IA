@@ -36,6 +36,7 @@ query2= """SELECT
 FROM pedidos
 GROUP BY mes
 ORDER BY mes
+LIMIT 10
 """
 df_meses = pd.read_sql(query2,con=engine)
 plt.figure(figsize=(10,6))
