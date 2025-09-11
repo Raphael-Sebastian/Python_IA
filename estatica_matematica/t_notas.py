@@ -23,4 +23,4 @@ print("Desvio padrão novo:", desvio_novo)
 
 # Teste t (H0: média = 70)
 t_stat2, p_valor2 = stats.ttest_1samp(notas_novas, popmean=70)
-print("t =", t_stat2, "p =", p_valor2) 
+print("t =", t_stat2, "p =", p_valor2)
