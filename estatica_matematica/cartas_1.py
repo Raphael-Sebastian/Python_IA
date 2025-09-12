@@ -6,9 +6,12 @@ baralho = ['A_copas','2_copas','3_copas','4_copas','5_copas','6_copas','7_copas'
           ['A_espadas','2_espadas','3_espadas','4_espadas','5_espadas','6_espadas','7_espadas','8_espadas','9_espadas','10_espadas','J_espadas','Q_espadas','K_espadas']
 
 simulacoes = [random.choice(baralho) for _ in range(10000)]
-cartas_copas = [carta for carta in simulacoes if "copas" in carta]
+cartas_copas = [carta for carta in simulacoes if carta in "3_copas, 4_copas, 5_copas"]
 
-prob = len(cartas_copas) / len(simulacoes)
+prob = len(cartas_copas) / len(simulacoes) 
 
-print(prob)
+print("A probabilidade é:",prob)
+
+
+
 

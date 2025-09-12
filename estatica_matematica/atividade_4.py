@@ -14,4 +14,4 @@ for resultado in sorted(frequencias):
     proporcao = frequencias[resultado] / total
     print(f"Resultado: {frequencias[resultado]} ({proporcao:.4f})")
 
-#caso o print precise de espaço entre os dados utilizamos o \t exemplo: print("feijao\tarroz")
+#caso o print precise de espaço entre os dados utilizamos o \t exemplo: print("feijao\t arroz")
