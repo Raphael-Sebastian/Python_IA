@@ -15,16 +15,4 @@ B = np.arange(n_sim) % 2 == 1
 P_sim = np.mean(A | B)
 print(f"Exercício - Probabilidade (bola vermelha ou índice ímpar) ~ {P_sim:.2f}")
 
-import numpy as np
-
-bolas = ["R", "R", "R", "B", "B"]
-sorteios = 10000
-
-resultados = [np.random.choice(bolas) for _ in range(sorteios)]
-resultados = np.array(resultados)
-
-evento_A = resultados == "R"
-evento_B = np.arange(sorteios) % 2 == 1
-
-probabilidade = np.mean(evento_A | evento_B)
-print(f"Probabilidade: {probabilidade:.2f}")
+# 
