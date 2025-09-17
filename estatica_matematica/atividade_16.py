@@ -1,0 +1,1 @@
+#identificação de outliers descricao:detecte valores fora da distribuição comum. tarefa: use a lista [10,12,12,15,18,20,22,100]. calcule o desvio padrao e identifique numeros que estao a mais de 2 desvios padrao da média.
