@@ -42,3 +42,76 @@ maior_receita = receita_produto.max()
 
 print(f"O produto com maior receita total é: {produto_maior}")
 print(f"Receita total: R$ {maior_receita:.2f}")
+
+#exiba a quantidade de registros por produto, calcule a receita media por produto e por região
+
+quantidade_produto = df["Produto"].value_counts()
+print("\nQuantidade de registro por produto:")
+print(quantidade_produto)
+
+receita_media = df.groupby("Produto")["Receita Total"].mean()
+print("\nReceita média por produto")
+print(receita_media)
+
+receita_regiao = df.groupby("Região")["Receita Total"].mean()
+print("\nReceita média por região:")
+print(receita_regiao)
+
+#10.histograma da coluna vendas (com kde=True). 11 boxplot da receita total por região
+
+plt.figure(figsize=(10,6))
+sns.histplot(data=df, x="Vendas", kde=True, bins=30, color="skyblue")
+plt.title("Histograma da coluna Vendas")
+plt.xlabel("Vendas")
+plt.ylabel("Frequência")
+plt.tight_layout()
+plt.show(block=False)
+
+# 11 boxplot da receita total por região
+
+plt.figure(figsize=(10,6))
+sns.boxplot(data=df, x="Região", y="Receita Total")
+plt.title("Boxplot da Receita Total por Região")
+plt.xlabel("Região")
+plt.ylabel("Receita Total (R$)")
+plt.tight_layout()
+plt.show(block=False)
+
+#12. grafico de barras com a receita média por produto. 13. scatterplot mostrando a relação entre vendas e receita total, colorindo por produto. 14.heatmap de correlação entre as variaveis numericas(vendas, preco  unitario, receita)
+
+#12. grafico de barras com a receita média por produto.
+
+plt.figure(figsize=(12,6))
+sns.barplot(x=receita_media.index, y=receita_media.values)
+plt.title("Receita Média por Produto")
+plt.xlabel("Produto")
+plt.ylabel("Receita Média (R$)")
+plt.tight_layout()
+plt.show(block=False)
+
+# 13. scatterplot mostrando a relação entre vendas e receita total, colorindo por produto.
+
+plt.figure(figsize=(12,8))
+sns.scatterplot(data=df, x="Vendas", y="Receita Total", hue="Produto", alpha=0.7)
+plt.title("Relação Entre Vendas e Receita Total por Produto")
+plt.xlabel("Vendas")
+plt.ylabel("Receita Total (R$)")
+plt.tight_layout()
+plt.show(block=False)
+
+# 14.heatmap de correlação entre as variaveis numericas(vendas, preco  unitario, receita)
+
+plt.figure(figsize=(8,6))
+
+colunas_heat =["Vendas","Preço Unitário","Receita Total"]
+corr = df[colunas_heat].corr()
+
+sns.heatmap(corr, annot=True, cmap="coolwarm")
+plt.title("Heatmap de correlação entre Variáveis Númericas")
+plt.show(block=False)
+input("Presione Enter para fechar tudo...")
+plt.close("all")
+
+
+
+
