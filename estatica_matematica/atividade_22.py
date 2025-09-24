@@ -59,59 +59,98 @@ print(receita_regiao)
 
 #10.histograma da coluna vendas (com kde=True). 11 boxplot da receita total por região
 
-plt.figure(figsize=(10,6))
-sns.histplot(data=df, x="Vendas", kde=True, bins=30, color="skyblue")
-plt.title("Histograma da coluna Vendas")
-plt.xlabel("Vendas")
-plt.ylabel("Frequência")
-plt.tight_layout()
-plt.show(block=False)
+# plt.figure(figsize=(10,6))
+# sns.histplot(data=df, x="Vendas", kde=True, bins=30, color="skyblue")
+# plt.title("Histograma da coluna Vendas")
+# plt.xlabel("Vendas")
+# plt.ylabel("Frequência")
+# plt.tight_layout()
+# plt.show(block=False)
 
-# 11 boxplot da receita total por região
+# # 11 boxplot da receita total por região
 
-plt.figure(figsize=(10,6))
-sns.boxplot(data=df, x="Região", y="Receita Total")
-plt.title("Boxplot da Receita Total por Região")
-plt.xlabel("Região")
-plt.ylabel("Receita Total (R$)")
-plt.tight_layout()
-plt.show(block=False)
+# plt.figure(figsize=(10,6))
+# sns.boxplot(data=df, x="Região", y="Receita Total")
+# plt.title("Boxplot da Receita Total por Região")
+# plt.xlabel("Região")
+# plt.ylabel("Receita Total (R$)")
+# plt.tight_layout()
+# plt.show(block=False)
 
-#12. grafico de barras com a receita média por produto. 13. scatterplot mostrando a relação entre vendas e receita total, colorindo por produto. 14.heatmap de correlação entre as variaveis numericas(vendas, preco  unitario, receita)
+# #12. grafico de barras com a receita média por produto. 13. scatterplot mostrando a relação entre vendas e receita total, colorindo por produto. 14.heatmap de correlação entre as variaveis numericas(vendas, preco  unitario, receita)
 
-#12. grafico de barras com a receita média por produto.
+# #12. grafico de barras com a receita média por produto.
 
-plt.figure(figsize=(12,6))
-sns.barplot(x=receita_media.index, y=receita_media.values)
-plt.title("Receita Média por Produto")
-plt.xlabel("Produto")
-plt.ylabel("Receita Média (R$)")
-plt.tight_layout()
-plt.show(block=False)
+# plt.figure(figsize=(12,6))
+# sns.barplot(x=receita_media.index, y=receita_media.values)
+# plt.title("Receita Média por Produto")
+# plt.xlabel("Produto")
+# plt.ylabel("Receita Média (R$)")
+# plt.tight_layout()
+# plt.show(block=False)
 
-# 13. scatterplot mostrando a relação entre vendas e receita total, colorindo por produto.
+# # 13. scatterplot mostrando a relação entre vendas e receita total, colorindo por produto.
 
-plt.figure(figsize=(12,8))
-sns.scatterplot(data=df, x="Vendas", y="Receita Total", hue="Produto", alpha=0.7)
-plt.title("Relação Entre Vendas e Receita Total por Produto")
-plt.xlabel("Vendas")
-plt.ylabel("Receita Total (R$)")
-plt.tight_layout()
-plt.show(block=False)
+# plt.figure(figsize=(12,8))
+# sns.scatterplot(data=df, x="Vendas", y="Receita Total", hue="Produto", alpha=0.7)
+# plt.title("Relação Entre Vendas e Receita Total por Produto")
+# plt.xlabel("Vendas")
+# plt.ylabel("Receita Total (R$)")
+# plt.tight_layout()
+# plt.show(block=False)
 
-# 14.heatmap de correlação entre as variaveis numericas(vendas, preco  unitario, receita)
+# # 14.heatmap de correlação entre as variaveis numericas(vendas, preco  unitario, receita)
 
-plt.figure(figsize=(8,6))
+# plt.figure(figsize=(8,6))
 
-colunas_heat =["Vendas","Preço Unitário","Receita Total"]
-corr = df[colunas_heat].corr()
+# colunas_heat =["Vendas","Preço Unitário","Receita Total"]
+# corr = df[colunas_heat].corr()
 
-sns.heatmap(corr, annot=True, cmap="coolwarm")
-plt.title("Heatmap de correlação entre Variáveis Númericas")
-plt.show(block=False)
-input("Presione Enter para fechar tudo...")
-plt.close("all")
+# sns.heatmap(corr, annot=True, cmap="coolwarm")
+# plt.title("Heatmap de correlação entre Variáveis Númericas")
+# plt.show(block=False)
+# input("Presione Enter para fechar tudo...")
+# plt.close("all")
 
+# #15. um grafico aonde mostra as vendas por mês crie uma coluna Mes a partir da coluna Data.
 
+# df["Mes"] = df["Data"].dt.to_period("M")
 
+# vendas_mes = df.groupby("Mes")["Vendas"].sum()
+# print("\n Vendas por mês")
+# print(vendas_mes)
 
+# #faça um grafico de linha mostrando a evolução mensal das vendas
+
+# plt.figure(figsize=(8,4))
+# vendas_mes.plot(kind="line", marker="o")
+# plt.title("Vendas por Mês")
+# plt.ylabel("Unidades")
+# plt.show()
+
+#16.media movel: calcule a media movel de 7 dias da receita total e plote em um grafico de linha para detectar tendencia.
+
+# df = df.sort_values("Data")
+
+# receita_diaria = df.groupby("Data")["Receita Total"].sum().reset_index()
+# receita_diaria["Média Móvel 7 Dias"] = receita_diaria["Receita Total"].rolling(7).mean()
+
+# plt.figure(figsize=(12,6))
+# plt.plot(receita_diaria["Data"], receita_diaria["Receita Total"], label="Receita Diária", marker="o", linestyle="-", alpha=0.6)
+
+# plt.plot(receita_diaria["Data"], receita_diaria["Média Móvel 7 Dias"], label="Média Móvel (7 dias)", color="red", linewidth=2)
+
+# plt.title("Tendência da Receita Total com Média Móvel de 7 dias")
+# plt.xlabel("Data")
+# plt.ylabel("Receita Total (R$)")
+# plt.grid()
+# plt.tight_layout()
+# plt.show()
+
+#17. produto mais vendido por região
+
+vendas_regiao = df.groupby(["Região", "Produto"])["Vendas"].sum()
+
+produto_regiao = vendas_regiao.groupby(level=0).idxmax()
+
+print(produto_regiao)

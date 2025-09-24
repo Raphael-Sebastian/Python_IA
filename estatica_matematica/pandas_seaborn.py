@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 import pandas as pd 
 
-df = pd.read_csv("dados.csv") 
+df = pd.read_csv("estatica_matematica/dados_produtos_vendas.csv") 
 
 # Soma das vendas por produto 
 
