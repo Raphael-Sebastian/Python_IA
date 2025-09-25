@@ -149,8 +149,14 @@ print(receita_regiao)
 
 #17. produto mais vendido por região
 
-vendas_regiao = df.groupby(["Região", "Produto"])["Vendas"].sum()
+vendas_regiao = df.groupby(["Região", "Produto"])["Vendas"].sum().reset_index()
 
-produto_regiao = vendas_regiao.groupby(level=0).idxmax()
+produto_regiao = vendas_regiao.loc[vendas_regiao.groupby("Região")["Vendas"].idxmax()]
 
+print("\n===Produto mais Vendido por Região===")
 print(produto_regiao)
+
+preco_medio = df.groupby(["Região", "Produto"])["Preço Unitário"].mean().reset_index()
+print(preco_medio)
+
+pivot = preco_medio.pivot(index="Produto", columns="Região", values="Preço Unitário")
