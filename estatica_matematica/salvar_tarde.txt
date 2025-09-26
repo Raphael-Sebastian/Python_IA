@@ -1,0 +1,511 @@
+Pular para o conteúdo
+Você disse:
+Calcular, usando pandas e numpy: 
+
+Média, mediana, desvio-padrão e variância de: 
+
+Passageiros 
+
+Distância (km) 
+
+Ocupação (%) 
+
+Receita (R$) 
+
+ Data Companhia Aeroporto Origem Aeroporto Destino  Passageiros  Distância (km)  Ocupação (%)  Receita (R$)
+
+base print("Média", np.mean(df))
+print("Média", np.mean(df))
+print("Média", np.mean(df))
+print("Média", np.mean(df))
+print("Média", np.mean(df))
+O ChatGPT disse:
+Para calcular média, mediana, desvio-padrão e variância das colunas:
+
+Passageiros
+
+Distância (km)
+
+Ocupação (%)
+
+Receita (R$)
+
+usando Pandas e NumPy, siga o exemplo abaixo:
+
+✅ Exemplo de Código (usando Pandas + NumPy)
+import pandas as pd
+import numpy as np
+
+# Suponha que seu DataFrame já tenha sido lido como:
+# df = pd.read_csv('seuarquivo.csv')  # ou outro método de leitura
+
+# Colunas que queremos analisar
+colunas = ['Passageiros', 'Distância (km)', 'Ocupação (%)', 'Receita (R$)']
+
+# Iterar pelas colunas e imprimir os resultados estatísticos
+for coluna in colunas:
+    print(f"\n📊 Estatísticas para '{coluna}':")
+    print(f"   Média: {np.mean(df[coluna])}")
+    print(f"   Mediana: {np.median(df[coluna])}")
+    print(f"   Desvio-padrão: {np.std(df[coluna], ddof=1)}")  # ddof=1 para amostra
+    print(f"   Variância: {np.var(df[coluna], ddof=1)}")
+✅ Observações importantes:
+np.std(..., ddof=1) e np.var(..., ddof=1) usam o desvio-padrão e variância amostrais (que é o mais comum em estatística). Se quiser a populacional, use ddof=0.
+
+Certifique-se de que os dados nas colunas estão no formato numérico (float ou int). Se necessário, use pd.to_numeric(df[coluna], errors='coerce') para converter.
+
+⚠️ Seu código atual:
+Você está apenas repetindo:
+
+print("Média", np.mean(df))
+Isso imprime a média de todas as colunas numéricas ao mesmo tempo. Para fazer análise detalhada de cada coluna, o loop que te mostrei acima é mais claro e completo.
+
+Se quiser ajuda para preparar o DataFrame ou fazer tratamento de dados antes dessas análises, posso te ajudar com isso também.
+
+Você disse:
+2.	Calcular o percentil 25%, 50%, 75% da receita.
+O ChatGPT disse:
+Para calcular os percentis 25%, 50% e 75% da coluna Receita (R$) usando NumPy ou Pandas, você pode fazer o seguinte:
+
+✅ Usando NumPy:
+import numpy as np
+
+# Supondo que a coluna 'Receita (R$)' esteja no DataFrame df
+receita = df['Receita (R$)']
+
+percentil_25 = np.percentile(receita, 25)
+percentil_50 = np.percentile(receita, 50)  # equivalente à mediana
+percentil_75 = np.percentile(receita, 75)
+
+print("Percentil 25%:", percentil_25)
+print("Percentil 50% (Mediana):", percentil_50)
+print("Percentil 75%:", percentil_75)
+✅ Alternativamente, usando Pandas:
+# Usando o método quantile()
+print("Percentil 25%:", df['Receita (R$)'].quantile(0.25))
+print("Percentil 50%:", df['Receita (R$)'].quantile(0.50))  # mediana
+print("Percentil 75%:", df['Receita (R$)'].quantile(0.75))
+✅ Saída esperada (exemplo fictício):
+Percentil 25%: 45000.0
+Percentil 50% (Mediana): 58000.0
+Percentil 75%: 73000.0
+Esses valores variam conforme os dados do seu DataFrame df.
+
+Se quiser, posso ajudar a exibir isso em formato de tabela também. Deseja isso?
+
+Você disse:
+3.	Encontrar a companhia com maior receita total e com maior número de passageiros.
+O ChatGPT disse:
+Para encontrar:
+
+✅ A companhia com maior receita total
+
+✅ A companhia com maior número de passageiros
+
+você pode usar o seguinte código com Pandas:
+
+✅ Código:
+# Agrupar por 'Companhia' e somar 'Receita (R$)' e 'Passageiros'
+agrupado = df.groupby('Companhia')[['Receita (R$)', 'Passageiros']].sum()
+
+# Encontrar a companhia com maior receita total
+companhia_maior_receita = agrupado['Receita (R$)'].idxmax()
+maior_receita = agrupado['Receita (R$)'].max()
+
+# Encontrar a companhia com maior número de passageiros
+companhia_mais_passageiros = agrupado['Passageiros'].idxmax()
+maior_num_passageiros = agrupado['Passageiros'].max()
+
+# Exibir resultados
+print(f"📈 Companhia com MAIOR RECEITA TOTAL: {companhia_maior_receita} (R$ {maior_receita:,.2f})")
+print(f"🧍 Companhia com MAIOR NÚMERO DE PASSAGEIROS: {companhia_mais_passageiros} ({maior_num_passageiros:,} passageiros)")
+✅ Explicação:
+groupby('Companhia'): Agrupa os dados por companhia aérea.
+
+[['Receita (R$)', 'Passageiros']].sum(): Soma os valores para cada companhia.
+
+.idxmax(): Retorna o nome da companhia com o maior valor.
+
+.max(): Retorna o valor máximo.
+
+📝 Exemplo de saída:
+📈 Companhia com MAIOR RECEITA TOTAL: Azul (R$ 8,500,000.00)
+🧍 Companhia com MAIOR NÚMERO DE PASSAGEIROS: Gol (120,000 passageiros)
+Se você quiser exibir as 5 maiores companhias por receita ou passageiros, posso te mostrar como também. Deseja isso?
+
+Você disse:
+  File "c:\Users\sebastian.8908\Documents\Codigos uc2 Python Petterson, John\Codigo uc2 Python John\estatica_matematica\atividade_avaliativa.py", line 42, in <module>
+    print(f"Companhia com Maior Receita Total: {companhia_maior} (R$) {maior_receita:.2f})")
+                                                                      ^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to method.__format__
+O ChatGPT disse:
+Esse erro acontece porque você provavelmente está tentando formatar o método max() como se fosse o valor retornado por ele.
+
+❌ Provável linha com erro:
+print(f"Companhia com Maior Receita Total: {companhia_maior} (R$) {maior_receita:.2f})")
+Se maior_receita estiver assim:
+
+maior_receita = agrupado['Receita (R$)'].max
+Note que faltam os parênteses. Você está pegando a função .max em vez de chamar ela como .max().
+
+✅ Correção:
+Certifique-se de que você está chamando o método com parênteses:
+
+maior_receita = agrupado['Receita (R$)'].max()
+A linha correta ficaria:
+
+print(f"Companhia com Maior Receita Total: {companhia_maior} (R$ {maior_receita:.2f})")
+✅ Versão completa corrigida:
+agrupado = df.groupby('Companhia')[['Receita (R$)', 'Passageiros']].sum()
+
+companhia_maior = agrupado['Receita (R$)'].idxmax()
+maior_receita = agrupado['Receita (R$)'].max()  # <-- com parênteses!
+
+companhia_passageiros = agrupado['Passageiros'].idxmax()
+maior_passageiros = agrupado['Passageiros'].max()  # <-- com parênteses!
+
+print(f"Companhia com Maior Receita Total: {companhia_maior} (R$ {maior_receita:,.2f})")
+print(f"Companhia com Maior Número de Passageiros: {companhia_passageiros} ({maior_passageiros:,} passageiros)")
+Se quiser, me mande o trecho do seu código e te ajudo a aplicar a correção diretamente nele.
+
+Você disse:
+#4.	Contagem de voos por companhia.
+O ChatGPT disse:
+Para fazer a contagem de voos por companhia, você pode usar o método .value_counts() ou .groupby().size() no Pandas, dependendo de como seus dados estão estruturados.
+
+✅ Opção 1: Se cada linha do DataFrame df representa 1 voo
+Use:
+
+# Contar quantos voos cada companhia realizou
+contagem_voos = df['Companhia'].value_counts()
+
+# Exibir resultado
+print("✈️ Contagem de voos por companhia:")
+print(contagem_voos)
+✅ Opção 2: Alternativa com .groupby().size()
+contagem_voos = df.groupby('Companhia').size()
+
+print("✈️ Contagem de voos por companhia:")
+print(contagem_voos)
+✅ Saída esperada (exemplo):
+✈️ Contagem de voos por companhia:
+Azul        120
+Gol         98
+LATAM       105
+Voepass      30
+🔍 Observações:
+A contagem é feita com base no número de linhas para cada valor na coluna Companhia.
+
+Isso assume que cada linha representa um voo.
+
+Se os dados estiverem agregados (ex: várias colunas com soma de passageiros por companhia), precisaremos de outro método — mas provavelmente esse aqui já resolve.
+
+Se quiser gerar um gráfico com isso (barras, pizza etc.), posso mostrar também. Deseja?
+
+Você disse:
+5.	Receita média por companhia e por aeroporto de origem.
+O ChatGPT disse:
+Para calcular a receita média por companhia e por aeroporto de origem, você precisa fazer um agrupamento duplo (por duas colunas) usando o groupby() do Pandas:
+
+✅ Código em Pandas:
+# Receita média por companhia e por aeroporto de origem
+receita_media = df.groupby(['Companhia', 'Aeroporto Origem'])['Receita (R$)'].mean()
+
+# Exibir o resultado
+print("💰 Receita média por Companhia e por Aeroporto de Origem:")
+print(receita_media)
+✅ Explicação:
+groupby(['Companhia', 'Aeroporto Origem']): agrupa os dados por companhia e aeroporto de origem.
+
+['Receita (R$)'].mean(): calcula a média da receita para cada grupo.
+
+📋 Exemplo de saída (formato MultiIndex):
+💰 Receita média por Companhia e por Aeroporto de Origem:
+Companhia  Aeroporto Origem
+Azul       GRU                   58000.0
+           CNF                   49000.0
+Gol        GRU                   60000.0
+           BSB                   52000.0
+LATAM      GRU                   70000.0
+           SDU                   67000.0
+Name: Receita (R$), dtype: float64
+🔄 Opcional: resetar índice para transformar em DataFrame "plano"
+Se quiser trabalhar com esse resultado como um DataFrame comum:
+
+receita_media_df = receita_media.reset_index()
+print(receita_media_df)
+Se quiser também calcular a soma total ou o número de voos por grupo, posso mostrar como. Deseja?
+
+Você disse:
+1.	Histograma da distribuição de passageiros.
+O ChatGPT disse:
+Para criar um histograma da distribuição de passageiros usando Pandas com Matplotlib ou Seaborn, você pode usar o seguinte código.
+
+✅ Exemplo com matplotlib:
+import matplotlib.pyplot as plt
+
+# Histograma da coluna 'Passageiros'
+plt.figure(figsize=(10, 6))
+plt.hist(df['Passageiros'], bins=10, color='skyblue', edgecolor='black')
+
+plt.title('📊 Distribuição de Passageiros por Voo')
+plt.xlabel('Número de Passageiros')
+plt.ylabel('Frequência')
+plt.grid(True, linestyle='--', alpha=0.5)
+plt.tight_layout()
+plt.show()
+✅ Exemplo com seaborn (mais visual):
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Histograma com kernel density (opcional)
+plt.figure(figsize=(10, 6))
+sns.histplot(df['Passageiros'], bins=10, kde=True, color='skyblue')
+
+plt.title('📊 Distribuição de Passageiros por Voo')
+plt.xlabel('Número de Passageiros')
+plt.ylabel('Frequência')
+plt.grid(True, linestyle='--', alpha=0.3)
+plt.tight_layout()
+plt.show()
+⚠️ Dicas:
+O parâmetro bins=10 define o número de faixas (intervalos) — você pode ajustar esse número conforme os dados.
+
+kde=True no seaborn.histplot() adiciona uma curva de densidade suavizada (opcional).
+
+Se quiser gerar histogramas separados por companhia ou comparar distribuições, também posso te mostrar como. Deseja isso?
+
+Você disse:
+2.	Boxplot da ocupação (%) separada por companhia aérea.
+O ChatGPT disse:
+Claro! Para criar um boxplot da ocupação (%) separada por companhia aérea usando Seaborn (que é ótimo para gráficos estatísticos), você pode fazer assim:
+
+Código com Seaborn:
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(12, 6))
+sns.boxplot(x='Companhia', y='Ocupação (%)', data=df, palette='Set2')
+
+plt.title('📦 Boxplot da Ocupação (%) por Companhia Aérea')
+plt.xlabel('Companhia')
+plt.ylabel('Ocupação (%)')
+
+plt.grid(True, linestyle='--', alpha=0.5)
+plt.tight_layout()
+plt.show()
+Explicação:
+x='Companhia': cria um boxplot para cada companhia.
+
+y='Ocupação (%)': variável numérica para comparar.
+
+palette='Set2': escolha de cores, pode ser alterada ou removida.
+
+Dica:
+Se o seu DataFrame tiver muitas companhias, o gráfico pode ficar apertado. Dá para ajustar o tamanho da figura com figsize.
+
+Se quiser que eu te ajude a salvar o gráfico em arquivo ou a personalizar mais, é só avisar! Quer?
+
+Você disse:
+3.	Gráfico de barras da receita média por companhia.
+O ChatGPT disse:
+Para criar um gráfico de barras da receita média por companhia, siga os passos abaixo usando Pandas + Seaborn ou Matplotlib.
+
+✅ Passo 1: Calcular a receita média por companhia
+# Receita média por companhia
+receita_media = df.groupby('Companhia')['Receita (R$)'].mean().sort_values(ascending=False)
+✅ Passo 2: Gráfico de barras com Seaborn
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Converter para DataFrame (opcional, mas facilita com Seaborn)
+receita_media_df = receita_media.reset_index()
+
+plt.figure(figsize=(10, 6))
+sns.barplot(x='Companhia', y='Receita (R$)', data=receita_media_df, palette='Blues_d')
+
+plt.title('📊 Receita Média por Companhia')
+plt.xlabel('Companhia')
+plt.ylabel('Receita Média (R$)')
+plt.grid(True, linestyle='--', alpha=0.4)
+plt.tight_layout()
+plt.show()
+✅ Alternativa com Matplotlib puro
+plt.figure(figsize=(10, 6))
+plt.bar(receita_media.index, receita_media.values, color='skyblue', edgecolor='black')
+
+plt.title('📊 Receita Média por Companhia')
+plt.xlabel('Companhia')
+plt.ylabel('Receita Média (R$)')
+plt.grid(True, linestyle='--', alpha=0.4)
+plt.tight_layout()
+plt.show()
+📝 Exemplo de saída (fictício):
+Companhia    Receita Média (R$)
+Azul         58.000
+Gol          55.500
+LATAM        61.200
+Voepass      42.800
+Se quiser:
+
+ordenar o gráfico do maior pro menor,
+
+mostrar os valores nas barras,
+
+ou salvar o gráfico como imagem (.png, .jpg, etc),
+
+é só me dizer que te mostro como!
+
+Você disse:
+3.	Gráfico de barras da receita média por companhia.
+O ChatGPT disse:
+Perfeito! Vamos repetir e resumir o passo a passo para gerar um gráfico de barras da receita média por companhia aérea, usando Seaborn e Pandas, de forma direta e funcional.
+
+✅ Etapas:
+1. Calcular a receita média por companhia:
+receita_media = df.groupby('Companhia')['Receita (R$)'].mean().sort_values(ascending=False)
+2. Gerar o gráfico de barras:
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Resetar índice para transformar em DataFrame
+receita
+Você disse:
+4.	Scatterplot de distância x receita para verificar relação.
+O ChatGPT disse:
+Para criar um scatterplot (gráfico de dispersão) da distância x receita — ou seja, para verificar se há alguma relação entre a distância percorrida e a receita gerada por voo — você pode usar Seaborn ou Matplotlib.
+
+✅ Código com Seaborn (recomendado)
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df, x='Distância (km)', y='Receita (R$)', hue='Companhia', palette='Set1', alpha=0.7)
+
+plt.title('🛫 Scatterplot: Distância x Receita')
+plt.xlabel('Distância (km)')
+plt.ylabel('Receita (R$)')
+plt.grid(True, linestyle='--', alpha=0.3)
+plt.tight_layout()
+plt.show()
+✅ Explicação:
+x='Distância (km)', y='Receita (R$)': define os eixos.
+
+hue='Companhia': diferencia cada companhia por cor (opcional).
+
+alpha=0.7: transparência para facilitar visualização em pontos sobrepostos.
+
+✅ Alternativa com Matplotlib:
+plt.figure(figsize=(10, 6))
+plt.scatter(df['Distância (km)'], df['Receita (R$)'], alpha=0.7, color='blue', edgecolor='black')
+
+plt.title('🛫 Scatterplot: Distância x Receita')
+plt.xlabel('Distância (km)')
+plt.ylabel('Receita (R$)')
+plt.grid(True, linestyle='--', alpha=0.3)
+plt.tight_layout()
+plt.show()
+🔍 Dica adicional:
+Se quiser visualizar uma tendência (regressão linear) no gráfico, adicione:
+
+sns.lmplot(data=df, x='Distância (km)', y='Receita (R$)', hue='Companhia', aspect=1.5)
+Se quiser que o gráfico exiba apenas uma companhia específica ou filtrar voos curtos/longos, posso te mostrar como. Deseja isso?
+
+Você disse:
+5.	(Desafio) Heatmap de correlação entre variáveis numéricas (Passageiros, Distância (km), Ocupação (%), Receita (R$)).
+O ChatGPT disse:
+Ótimo desafio! Um heatmap de correlação é uma excelente forma de visualizar como as variáveis numéricas estão relacionadas entre si.
+
+Vamos criar um heatmap de correlação entre:
+
+Passageiros
+
+Distância (km)
+
+Ocupação (%)
+
+Receita (R$)
+
+✅ Passo a passo com Seaborn
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Selecionar apenas as colunas numéricas desejadas
+colunas_numericas = ['Passageiros', 'Distância (km)', 'Ocupação (%)', 'Receita (R$)']
+df_corr = df[colunas_numericas]
+
+# Calcular a matriz de correlação
+matriz_corr = df_corr.corr()
+
+# Criar o heatmap
+plt.figure(figsize=(8, 6))
+sns.heatmap(matriz_corr, annot=True, cmap='coolwarm', fmt=".2f", linewidths=0.5)
+
+plt.title('🔥 Heatmap de Correlação entre Variáveis Numéricas')
+plt.tight_layout()
+plt.show()
+✅ O que isso faz:
+df.corr(): calcula a correlação de Pearson entre as variáveis.
+
+annot=True: mostra os valores numéricos dentro dos quadrantes.
+
+cmap='coolwarm': esquema de cores (pode usar viridis, YlGnBu, etc.).
+
+fmt=".2f": formata os números com 2 casas decimais.
+
+🧠 Interpretação:
+Valores próximos de +1: forte correlação positiva.
+
+Valores próximos de -1: forte correlação negativa.
+
+Valores próximos de 0: pouca ou nenhuma correlação.
+
+✅ Exemplo fictício de saída (valores de correlação):
+Passageiros	Distância (km)	Ocupação (%)	Receita (R$)
+Passageiros	1.00	0.42	0.75	0.89
+Distância (km)	0.42	1.00	0.33	0.58
+Ocupação (%)	0.75	0.33	1.00	0.72
+Receita (R$)	0.89	0.58	0.72	1.00
+Se quiser gerar também o gráfico de pares (pairplot) para visualizar essas relações individualmente em scatterplots, posso mostrar também. Deseja?
+
+Você disse:
+•	Qual companhia tem maior participação em número de voos?
+O ChatGPT disse:
+Para descobrir qual companhia tem a maior participação no número de voos, você precisa:
+
+Contar quantos voos cada companhia realizou.
+
+Calcular a porcentagem de participação.
+
+Identificar a companhia com o maior valor.
+
+✅ Código em Pandas:
+# 1. Contar número de voos por companhia
+voos_por_companhia = df['Companhia'].value_counts()
+
+# 2. Calcular participação percentual
+participacao_percentual = (voos_por_companhia / voos_por_companhia.sum()) * 100
+
+# 3. Encontrar companhia com maior participação
+companhia_maior_participacao = participacao_percentual.idxmax()
+percentual_maior = participacao_percentual.max()
+
+# 4. Exibir resultado
+print(f"✈️ Companhia com MAIOR PARTICIPAÇÃO em número de voos: {companhia_maior_participacao} ({percentual_maior:.2f}%)")
+📝 Exemplo de saída (fictícia):
+✈️ Companhia com MAIOR PARTICIPAÇÃO em número de voos: Gol (36.75%)
+✅ Quer visualizar isso com gráfico?
+Se quiser, posso gerar um gráfico de pizza ou barras horizontais mostrando a participação de cada companhia. Deseja esse visual?
+
+
+
+
+Anexar
+
+Buscar
+
+Estudar
+
+Voz
+Nenhum arquivo escolhidoNenhum arquivo escolhido
+O ChatGPT pode cometer erros. Considere verificar informações importantes.
