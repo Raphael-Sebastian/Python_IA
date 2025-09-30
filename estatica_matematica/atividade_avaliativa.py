@@ -6,7 +6,7 @@ import seaborn as sns
 
 df = pd.read_csv("estatica_matematica/dados_transporte.csv")
 print(df.info())
-print(df.head())
+print(df.head(5))
 print(df.isna().sum())
 
 #B = Estatísticas Descritivas
@@ -40,6 +40,7 @@ maior_receita = companhia_agrupamento["Receita (R$)"].max()
 
 companhia_passageiros = companhia_agrupamento["Passageiros"].idxmax()
 maior_passageiros = companhia_agrupamento["Passageiros"].max()
+
 
 print(f"Companhia com maior receita total: {companhia_maior} (R$) {maior_receita:,.2f})")
 print(f"Companhia com maior número de passageiros:{companhia_passageiros}({maior_passageiros:,} Passageiros)")
@@ -117,10 +118,10 @@ sns.heatmap(matriz_corr, annot=True, cmap="coolwarm")
 plt.title("Heatmap de Correlação entre Variáveis Numéricas")
 plt.tight_layout()
 plt.show(block=False)
-input("Pressione Enter para fechar tudo...")
-plt.close("all")
 
 #D. Perguntas Analíticas.
+
+#Qual companhia tem maior participação em número de voos?
 
 voos_companhia = df["Companhia"].value_counts()
 participacao_percentual = (voos_companhia / voos_companhia.sum()) 
@@ -128,3 +129,72 @@ companhia_maior_participacao = participacao_percentual.idxmax()
 percentual_maior = participacao_percentual.max()
 
 print(f"Companhia com maior participação em números de voos: {companhia_maior_participacao} ({percentual_maior:.2f}%)")
+
+#A distância influencia a receita?
+
+correlacao = df[["Distância (km)", "Receita (R$)"]].corr()
+print("Correlação entre Distância e Receita:")
+print(correlacao)
+
+#Os voos com maior ocupação são necessariamente os de maior receita?
+
+correlacao_ocupacao = df["Ocupação (%)"].corr(df["Receita (R$)"])
+print(f"Correlação entre ocupação (%) e receita (R$): {correlacao_ocupacao:.2f} ")
+
+#Quais aeroportos de origem concentram mais voos?
+
+voos_aeropotos = df["Aeroporto Origem"].value_counts()
+
+print(voos_aeropotos.head(10))
+
+#E. Extensão 
+
+# Usar groupby para analisar:
+
+
+# Receita média por mês.
+# df["Data"] = pd.to_datetime(df["Data"], errors="coerce", dayfirst=True)
+# print(df["Data"].head(10))
+df["Data"] = pd.to_datetime(df["Data"])
+df["Mes"] = df["Data"].dt.to_period("M")
+print("\nReceita média por mês:")
+print(df.groupby("Mes")["Receita (R$)"].mean())
+
+
+# Ocupação média por companhia.
+ocupacao_media = df.groupby("Companhia")["Ocupação (%)"].mean()
+
+print("Ocupação média por companhia: ")
+print(ocupacao_media)
+
+#1)Qual a Rota mais eficiente por companhia (baseado em Ocupação média ou Receita por passageiro)? Mostrar as 5 melhores em ordem decrescente
+
+df["Receita por Passageiro"] = df["Receita (R$)"] / df["Passageiros"]
+
+eficiencia_receita = df.groupby(["Companhia", "Aeroporto Origem", "Aeroporto Destino"])["Receita por Passageiro"].mean()
+
+top5_receita = eficiencia_receita.sort_values(ascending=False).head(5)
+print("Top 5 rotas mais eficientes (receita por passageiro):")
+print(top5_receita)
+
+#2)Calcular e mostrar graficamente a Evolução mensal do total de passageiros por companhia
+
+df["Data"] = pd.to_datetime(df["Data"], errors="coerce")
+
+df["AnoMes"] = df["Data"].dt.to_period("M")
+evolucao = df.groupby(["AnoMes", "Companhia"])["Passageiros"].sum().reset_index()
+evolucao_pivot = evolucao.pivot(index="AnoMes", columns="Companhia", values="Passageiros")
+
+plt.figure(figsize=(12, 6))
+evolucao_pivot.plot(marker="o")
+
+plt.title("Evolução Mensal do Total de Passageiros por Companhia")
+plt.xlabel("Ano-Mês")
+plt.ylabel("Total de Passageiros")
+plt.grid(True)
+plt.legend(title="Companhia")
+plt.tight_layout()
+plt.show(block=False)
+input("Pressione Enter para fechar tudo...")
+plt.close("all")
+
