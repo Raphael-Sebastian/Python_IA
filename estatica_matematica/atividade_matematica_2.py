@@ -10,3 +10,6 @@ resultados = funcao_especifica(valores)
 
 print("Valores de x:", valores)
 print("Resultados f(x):", resultados)
+
+#criar a funcao quadratica generica em python e repasssar os parametros na chamada exemplo: grafico_quadratica(1,-3,2)
+
