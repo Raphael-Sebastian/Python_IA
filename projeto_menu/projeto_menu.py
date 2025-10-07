@@ -1,6 +1,6 @@
 import os
 
-caminho_pdf = r"C:\Users\sebastian.8908\Documents\Codigos uc2 Python Petterson, John\Codigo uc2 Python John\Diagrama_hard.pdf"
+caminho_pdf = "C:/Users/sebastian.8908/Documents/Codigos uc2 Python Petterson, John/Codigo uc2 Python John/projeto_menu/Diagrama_hard.pdf"
 
 
 while True:
@@ -18,5 +18,6 @@ while True:
         print("Volte sempre!!! ")
         break 
     if opcao == "1":
-        os.startfile(caminho_pdf)
-    
+        os.startfile(caminho_pdf)    
+    if opcao == "2":
+        print()
