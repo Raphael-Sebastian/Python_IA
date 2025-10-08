@@ -74,7 +74,6 @@ print(f"Probabilidade estimada de sair exatamente cara: {probabilidade_cara:.4%}
 
 import numpy as np
 
-# Urna com 3 vermelhas (R) e 2 verdes (G)
 bolas = np.array(['R', 'R', 'R', 'G', 'G'])
 sucessos = 0
 total = 0
