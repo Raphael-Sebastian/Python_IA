@@ -89,7 +89,6 @@ print(df[["Data", "Mes"]].head())
 
 quantidade_vendida_por_mes = df.groupby("Mes")["Quantidade_Vendida"].sum().reset_index()
 
-
 print("Quantidade total vendida por mês: ")
 print(quantidade_vendida_por_mes)
 
@@ -149,7 +148,7 @@ plt.xlabel("Fábrica")
 plt.ylabel("Lucro médio")
 
 plt.tight_layout()
-plt.show(block=False)
+plt.show(bloSck=False)
 
 
 
