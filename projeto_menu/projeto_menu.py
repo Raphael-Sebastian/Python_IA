@@ -1,7 +1,8 @@
 import os
 
 # Caminho do PDF para abrir com a opção 1 do menu
-caminho_pdf = "C:/Users/sebastian.8908/Documents/Codigos uc2 Python Petterson, John/Codigo uc2 Python John/projeto_menu/Diagrama_hard.pdf"
+caminho_pdf = "C:/Users/sebastian.8908/Documents/Codigos uc2 Python Petterson, John/Codigo uc2 Python John/projeto_menu/projeto_pdf_menu.pdf"
+caminho_projeto= "C:/Users/sebastian.8908/Documents/Codigos uc2 Python Petterson, John/Codigo uc2 Python John/projeto_menu/Inteligencia_Artificial_no_Games.pdf"
 
 def quiz_estatistica_ia():
     perguntas = [
@@ -135,6 +136,7 @@ while True:
     elif opcao == "3":
         quiz_machine_learning()
     elif opcao == "4":
-        print("\nPDF da pesquisa sobre IA ainda não foi adicionado.")
+        if os.path.exists(caminho_projeto):
+            os.startfile(caminho_projeto)
     else:
         print("\nOpção inválida. Tente novamente.")
